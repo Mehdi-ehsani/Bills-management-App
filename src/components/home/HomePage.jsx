@@ -13,7 +13,7 @@ import {
 	dateSelector,
 	descriptionSelector,
 } from "../../app/reducers/billSlice";
-
+import { ADD, DELETE, billsSelector } from "../../app/reducers/billsSlice";
 const HomePage = () => {
 	const dispatch = useDispatch();
 	const title = useSelector(titleSelector);
@@ -22,6 +22,7 @@ const HomePage = () => {
 	const date = useSelector(dateSelector);
 	const tracking = useSelector(trackingSelector);
 
+	const bills = useSelector(billsSelector);
 	//----------in start----------//
 	useEffect(() => {
 		// const data = window.localStorage.getItem("data");
@@ -31,6 +32,18 @@ const HomePage = () => {
 	// useEffect(() => {
 	// 	window.localStorage.setItem("data", JSON.stringify(name));
 	// }, [name]);
+	const addBill = () => {
+		dispatch(
+			ADD({
+				title: title,
+				date: date,
+				description: description,
+				tracking: tracking,
+				cost: cost,
+			})
+		);
+		console.log(bills);
+	};
 	return (
 		<div>
 			<h1>سلام</h1>
@@ -68,6 +81,15 @@ const HomePage = () => {
 				placeholder="مبلغ"
 				onChange={(e) => dispatch(ADD_COST(e.target.value))}
 			/>
+			<button onClick={addBill}>add</button>
+			<div>
+				{bills.map((bill) => (
+					<div>
+						<p>{bill.title}</p>
+						<p>{bill.description}</p>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };

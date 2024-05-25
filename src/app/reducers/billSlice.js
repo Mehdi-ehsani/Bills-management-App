@@ -10,7 +10,7 @@ const initialState = {
    };
 
 const billSlice = createSlice({
-    name: "bills",
+    name: "bill",
     initialState,
     reducers: {
         ADD_TITLE: (state, action) => {
@@ -35,8 +35,8 @@ const billSlice = createSlice({
 export default billSlice.reducer
 export const { ADD_TITLE , ADD_DESCRIPTION , ADD_COST , ADD_DATE ,ADD_TRACKING} = billSlice.actions
 //----------------selectors----------------//
-export const titleSelector = store => store.bills.title
-export const descriptionSelector = store => store.bills.description
-export const costSelector = store => store.bills.cost
-export const dateSelector = store => store.bills.date
-export const trackingSelector = store => store.bills.tracking
+export const titleSelector = store => store.bill.title
+export const descriptionSelector = store => store.bill.description
+export const costSelector = store => store.bill.cost
+export const dateSelector = store => store.bill.date
+export const trackingSelector = store => store.bill.tracking
