@@ -13,7 +13,7 @@ import {
 	dateSelector,
 	descriptionSelector,
 } from "../../app/reducers/billSlice";
-import { ADD, DELETE, billsSelector } from "../../app/reducers/billsSlice";
+
 const HomePage = () => {
 	const dispatch = useDispatch();
 	const title = useSelector(titleSelector);
@@ -22,28 +22,57 @@ const HomePage = () => {
 	const date = useSelector(dateSelector);
 	const tracking = useSelector(trackingSelector);
 
-	const bills = useSelector(billsSelector);
+	
+
 	//----------in start----------//
+
+	let bills = [];
 	useEffect(() => {
-		// const data = window.localStorage.getItem("data");
-		// setName(JSON.parse(data));
+		if (bills.length) {
+			
+		} else {
+			const data = window.localStorage.getItem("data");
+			bills = JSON.parse(data);
+			console.log("reload");
+		}
 	}, []);
+	
 	//----------in data change----------//
-	// useEffect(() => {
-	// 	window.localStorage.setItem("data", JSON.stringify(name));
-	// }, [name]);
 	const addBill = () => {
-		dispatch(
-			ADD({
-				title: title,
-				date: date,
-				description: description,
-				tracking: tracking,
-				cost: cost,
-			})
-		);
-		console.log(bills);
+		if(window.localStorage.length){
+		const data = window.localStorage.getItem("data");
+		bills = JSON.parse(data);
+		bills.push({
+			title: title,
+			date: date,
+			description: description,
+			tracking: tracking,
+			cost: cost,
+		});
+	}else {
+		bills = [{
+			title: title,
+			date: date,
+			description: description,
+			tracking: tracking,
+			cost: cost,
+		}]
+		
+	}
+		dispatch(ADD_COST(""));
+		dispatch(ADD_DESCRIPTION(""));
+		dispatch(ADD_TRACKING(""));
+		dispatch(ADD_TITLE(""));
+		dispatch(ADD_DATE(""));
+		window.localStorage.setItem("data" , JSON.stringify(bills))
+
+		console.log("add", bills);
 	};
+	const deleteBill = (title) => {
+		// dispatch(DELETE(title));
+		console.log("delete");
+	};
+
 	return (
 		<div>
 			<h1>سلام</h1>
@@ -82,13 +111,17 @@ const HomePage = () => {
 				onChange={(e) => dispatch(ADD_COST(e.target.value))}
 			/>
 			<button onClick={addBill}>add</button>
+
 			<div>
-				{bills.map((bill) => (
-					<div>
-						<p>{bill.title}</p>
-						<p>{bill.description}</p>
-					</div>
-				))}
+				{bills.length > 0
+					? bills.map((bill) => (
+							<div key={bill.title}>
+								<p>{bill.title}</p>
+								<p>{bill.description}</p>
+								<button onClick={() => deleteBill(bill.title)}>delete</button>
+							</div>
+					  ))
+					: null}
 			</div>
 		</div>
 	);

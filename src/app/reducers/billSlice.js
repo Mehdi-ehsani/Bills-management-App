@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    title: "mm",
-    description: "salam",
-    cost: "23232",
-    tracking: "22",
-    date: "1403/03/01",
+    title: "",
+    description: "",
+    cost: "",
+    tracking: "",
+    date: "",
 
    };
 
