@@ -22,60 +22,50 @@ const HomePage = () => {
 	const date = useSelector(dateSelector);
 	const tracking = useSelector(trackingSelector);
 
-	
+	const [data , setData] = useState([])
 
 	//----------in start----------//
 
-	let bills = [];
 	useEffect(() => {
-		if (bills.length) {
-			
-		} else {
-			const data = window.localStorage.getItem("data");
-			bills = JSON.parse(data);
-			console.log("reload");
-		}
+		setData(JSON.parse(localStorage.getItem("data")) || []);
 	}, []);
-	
-	//----------in data change----------//
-	const addBill = () => {
-		if(window.localStorage.length){
-		const data = window.localStorage.getItem("data");
-		bills = JSON.parse(data);
-		bills.push({
-			title: title,
-			date: date,
-			description: description,
-			tracking: tracking,
-			cost: cost,
-		});
-	}else {
-		bills = [{
-			title: title,
-			date: date,
-			description: description,
-			tracking: tracking,
-			cost: cost,
-		}]
+	const addToLocalStorage = (title , description , date , cost , track) => {
+		// setData(JSON.parse(localStorage.getItem("data")) || []);
 		
-	}
+		data.push({title , description , date , cost , track });
+
+		localStorage.setItem("data" , JSON.stringify(data))
+
 		dispatch(ADD_COST(""));
 		dispatch(ADD_DESCRIPTION(""));
 		dispatch(ADD_TRACKING(""));
 		dispatch(ADD_TITLE(""));
 		dispatch(ADD_DATE(""));
-		window.localStorage.setItem("data" , JSON.stringify(bills))
-
-		console.log("add", bills);
-	};
+	}
+	//----------in data change----------//
 	const deleteBill = (title) => {
-		// dispatch(DELETE(title));
-		console.log("delete");
+		Array.prototype.remove = function() {
+			var what, a = arguments, L = a.length, ax;
+			while (L && this.length) {
+				what = a[--L];
+				while ((ax = this.indexOf(what)) !== -1) {
+					this.splice(ax, 1);
+				}
+			}
+			return this;
+		};
+		data.map(bill => {
+			bill.title == title ? data.remove(bill) : null
+		})
+		setData(data)
+		localStorage.setItem("data" , JSON.stringify(data))
+		
 	};
 
 	return (
 		<div>
 			<h1>سلام</h1>
+			<form >
 			<input
 				className="border-2 border-sky-500"
 				type="text"
@@ -110,18 +100,16 @@ const HomePage = () => {
 				placeholder="مبلغ"
 				onChange={(e) => dispatch(ADD_COST(e.target.value))}
 			/>
-			<button onClick={addBill}>add</button>
+			<button onClick={() => addToLocalStorage(title , description , date , cost , tracking)}>add</button>
+			</form>
 
 			<div>
-				{bills.length > 0
-					? bills.map((bill) => (
-							<div key={bill.title}>
-								<p>{bill.title}</p>
-								<p>{bill.description}</p>
-								<button onClick={() => deleteBill(bill.title)}>delete</button>
-							</div>
-					  ))
-					: null}
+				{data.map(bill => (
+					<div key={bill.title}>
+                       <p>{bill.title}</p>
+					   <button onClick={() => deleteBill(bill.title)} >delete</button>
+					</div>
+				))}
 			</div>
 		</div>
 	);
