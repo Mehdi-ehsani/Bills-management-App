@@ -13,6 +13,7 @@ import {
 	dateSelector,
 	descriptionSelector,
 } from "../../app/reducers/billSlice";
+import Navbar from "../layout/Navbar";
 
 const HomePage = () => {
 	const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const HomePage = () => {
 
 	return (
 		<div>
-			<h1>سلام</h1>
+			<Navbar/>
 			<form onClick={e => e.preventDefault()} >
 				<input
 					className="border-2 border-sky-500"
