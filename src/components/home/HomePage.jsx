@@ -103,10 +103,17 @@ const HomePage = () => {
 			<button onClick={() => addToLocalStorage(title , description , date , cost , tracking)}>add</button>
 			</form>
 
-			<div>
+			<div className="grid grid-cols-3 gap-4 my-8">
 				{data.map(bill => (
-					<div key={bill.title}>
-                       <p>{bill.title}</p>
+					<div className="bg-gray-200 border-r-2 border-yellow-400" key={bill.title}>
+                       <p className="">{bill.title}</p>
+                       <p>{bill.description}</p>
+                       <div>
+                       <p>{bill.track}</p>
+                       <p>{bill.date}</p>
+					   </div>
+					   <hr />
+					   <p>{bill.cost}</p>
 					   <button onClick={() => deleteBill(bill.title)} >delete</button>
 					</div>
 				))}
