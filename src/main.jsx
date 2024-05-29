@@ -9,10 +9,14 @@ import store from "./app/store/store.js";
 
 import { BrowserRouter } from "react-router-dom";
 
+import Layout from "./components/Layout/Layout.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<BrowserRouter>
 		<Provider store={store}>
-			<App />
+			<Layout>
+				<App />
+			</Layout>
 		</Provider>
 	</BrowserRouter>
 );

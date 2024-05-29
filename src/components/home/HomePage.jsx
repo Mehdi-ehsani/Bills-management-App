@@ -13,7 +13,6 @@ import {
 	dateSelector,
 	descriptionSelector,
 } from "../../app/reducers/billSlice";
-import Navbar from "../layout/Navbar";
 
 const HomePage = () => {
 	const dispatch = useDispatch();
@@ -24,7 +23,6 @@ const HomePage = () => {
 	const tracking = useSelector(trackingSelector);
 
 	const [data, setData] = useState([]);
-	const [isDelete, setIsDelete] = useState(false);
 
 	let localData = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -33,11 +31,8 @@ const HomePage = () => {
 	useEffect(() => {
 		setData(JSON.parse(localStorage.getItem("data")) || []);
 	}, []);
-    
 
 	const addToLocalStorage = (title, description, date, cost, track) => {
-		// setData(JSON.parse(localStorage.getItem("data")) || []);
-
 		data.push({ title, description, date, cost, track });
 
 		localStorage.setItem("data", JSON.stringify(data));
@@ -64,20 +59,15 @@ const HomePage = () => {
 			return this;
 		};
 		data.map((bill) => {
-		
-		bill.title == title ? data.remove(bill)  : null;
+			bill.title == title ? data.remove(bill) : null;
 		});
 		localStorage.setItem("data", JSON.stringify(data));
 		setData(JSON.parse(localStorage.getItem("data")));
-       
-
-		// window.location.reload()
 	};
 
 	return (
 		<div>
-			<Navbar/>
-			<form onClick={e => e.preventDefault()} >
+			<form onClick={(e) => e.preventDefault()}>
 				<input
 					className="border-2 border-sky-500"
 					type="text"
@@ -125,7 +115,7 @@ const HomePage = () => {
 			<div className="grid grid-cols-3 gap-4 my-8">
 				{data.map((bill) => (
 					<div
-						className={isDelete ? "hidden" :"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"}
+						className={"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"}
 						key={bill.title}
 					>
 						<p className="text-2xl font-bold mb-2">{bill.title}</p>
@@ -150,8 +140,16 @@ const HomePage = () => {
 							</p>
 						</div>
 						<div className="flex gap-2 mt-3">
-							<p className="w-2/3 h-8 bg-yellow-500 text-xl rounded-md font-semibold text-center leading-8 shadow-md"> {bill.cost} <span>تومان</span> </p>
-							<button className="w-1/3 h-8 text-xl leading-8 font-semibold border-2 cursor-pointer text-red-500 rounded-md border-red-500 hover:bg-red-500 hover:text-white transition-colors" onClick={() => deleteBill(bill.title)}>حذف</button>
+							<p className="w-2/3 h-8 bg-yellow-500 text-xl rounded-md font-semibold text-center leading-8 shadow-md">
+								{" "}
+								{bill.cost} <span>تومان</span>{" "}
+							</p>
+							<button
+								className="w-1/3 h-8 text-xl leading-8 font-semibold border-2 cursor-pointer text-red-500 rounded-md border-red-500 hover:bg-red-500 hover:text-white transition-colors"
+								onClick={() => deleteBill(bill.title)}
+							>
+								حذف
+							</button>
 						</div>
 					</div>
 				))}
