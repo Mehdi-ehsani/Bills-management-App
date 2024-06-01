@@ -24,7 +24,7 @@ const HomePage = () => {
 
 	const [data, setData] = useState([]);
 
-	let localData = JSON.parse(localStorage.getItem("data")) || [];
+	// let localData = JSON.parse(localStorage.getItem("data")) || [];
 
 	//----------in start----------//
 
@@ -72,7 +72,7 @@ const HomePage = () => {
 					<div className="w-2/5">
 						<label className="block text-xl font-semibold mb-1">نام قبض:</label>
 						<input
-							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={title}
 							maxLength={30}
@@ -83,7 +83,7 @@ const HomePage = () => {
 					<div className="w-1/5">
 						<label className="block text-xl font-semibold mb-1">تاریخ:</label>
 						<input
-							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={date}
 							onChange={(e) => dispatch(ADD_DATE(e.target.value))}
@@ -94,7 +94,7 @@ const HomePage = () => {
 							شماره پیگیری:
 						</label>
 						<input
-							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={tracking}
 							placeholder=" "
@@ -104,7 +104,7 @@ const HomePage = () => {
 					<div className="w-1/5">
 						<label className="block text-xl font-semibold mb-1">مبلغ:</label>
 						<input
-							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={cost}
 							placeholder=""
@@ -115,7 +115,7 @@ const HomePage = () => {
 				<div className="mt-2">
 					<label className="block text-xl font-semibold mb-1">مبلغ:</label>
 					<input
-						className="border-2 border-gray-600 w-full h-24 rounded-lg"
+						className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-24 rounded-lg"
 						type="text"
 						value={description}
 						placeholder=""
@@ -123,7 +123,7 @@ const HomePage = () => {
 					/>
 				</div>
 				<button
-				    className="w-full my-4 rounded-lg text-xl font-semibold   h-10 bg-yellow-400"
+				    className="w-full my-4 rounded-lg text-xl font-semibold text-yellow-500  h-10 bg-[#333] shadow-md"
 					onClick={() =>
 						addToLocalStorage(title, description, date, cost, tracking)
 					}
@@ -131,8 +131,10 @@ const HomePage = () => {
 					اضافه کردن
 				</button>
 			</form>
-
-			<div className="grid grid-cols-3 gap-4 my-8">
+            <div>
+				<p className="text-3xl font-bold mt-5">قبض ها</p>
+					<div className="grid grid-cols-3 gap-4 mb-8 mt-3">
+				
 				{data.map((bill) => (
 					<div
 						className={
@@ -176,6 +178,8 @@ const HomePage = () => {
 					</div>
 				))}
 			</div>
+			</div>
+		
 		</div>
 	);
 };
