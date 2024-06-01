@@ -68,54 +68,76 @@ const HomePage = () => {
 	return (
 		<div>
 			<form onClick={(e) => e.preventDefault()}>
-				<input
-					className="border-2 border-sky-500"
-					type="text"
-					value={title}
-					maxLength={20}
-					placeholder="نام قبض"
-					onChange={(e) => dispatch(ADD_TITLE(e.target.value))}
-				/>
-				<input
-					className="border-2 border-sky-500"
-					type="text"
-					value={date}
-					onChange={(e) => dispatch(ADD_DATE(e.target.value))}
-				/>
-				<input
-					className="border-2 border-sky-500"
-					type="text"
-					value={description}
-					placeholder="یادداشت"
-					onChange={(e) => dispatch(ADD_DESCRIPTION(e.target.value))}
-				/>
-				<input
-					className="border-2 border-sky-500"
-					type="text"
-					value={tracking}
-					placeholder="شماره پیگیری"
-					onChange={(e) => dispatch(ADD_TRACKING(e.target.value))}
-				/>
-				<input
-					className="border-2 border-sky-500"
-					type="text"
-					value={cost}
-					placeholder="مبلغ"
-					onChange={(e) => dispatch(ADD_COST(e.target.value))}
-				/>
+				<div className="flex gap-3">
+					<div className="w-2/5">
+						<label className="block text-xl font-semibold mb-1">نام قبض:</label>
+						<input
+							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							type="text"
+							value={title}
+							maxLength={30}
+							placeholder=" "
+							onChange={(e) => dispatch(ADD_TITLE(e.target.value))}
+						/>
+					</div>
+					<div className="w-1/5">
+						<label className="block text-xl font-semibold mb-1">تاریخ:</label>
+						<input
+							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							type="text"
+							value={date}
+							onChange={(e) => dispatch(ADD_DATE(e.target.value))}
+						/>
+					</div>
+					<div className="w-1/5">
+						<label className="block text-xl font-semibold mb-1">
+							شماره پیگیری:
+						</label>
+						<input
+							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							type="text"
+							value={tracking}
+							placeholder=" "
+							onChange={(e) => dispatch(ADD_TRACKING(e.target.value))}
+						/>
+					</div>
+					<div className="w-1/5">
+						<label className="block text-xl font-semibold mb-1">مبلغ:</label>
+						<input
+							className="border-2 border-gray-600 w-full h-9 rounded-lg"
+							type="text"
+							value={cost}
+							placeholder=""
+							onChange={(e) => dispatch(ADD_COST(e.target.value))}
+						/>
+					</div>
+				</div>
+				<div className="mt-2">
+					<label className="block text-xl font-semibold mb-1">مبلغ:</label>
+					<input
+						className="border-2 border-gray-600 w-full h-24 rounded-lg"
+						type="text"
+						value={description}
+						placeholder=""
+						onChange={(e) => dispatch(ADD_DESCRIPTION(e.target.value))}
+					/>
+				</div>
 				<button
+				    className="w-full my-4 rounded-lg text-xl font-semibold   h-10 bg-yellow-400"
 					onClick={() =>
 						addToLocalStorage(title, description, date, cost, tracking)
 					}
 				>
-					add
+					اضافه کردن
 				</button>
 			</form>
 
 			<div className="grid grid-cols-3 gap-4 my-8">
 				{data.map((bill) => (
 					<div
-						className={"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"}
+						className={
+							"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
+						}
 						key={bill.title}
 					>
 						<p className="text-2xl font-bold mb-2">{bill.title}</p>
