@@ -25,20 +25,20 @@ const Bills = () => {
 	};
 
 	return (
-		<div>
-			<div className="flex items-center justify-between ">
-				<p className="text-3xl font-bold mt-5">قبض ها</p>
-				<div className="flex items-center gap-2 border-2 border-[#333] py-1 px-2 rounded-lg">
+		<div className="mx-4">
+			<div className="  flex items-center justify-between ">
+				<p className=" text-xl  lg:text-3xl font-bold mt-5">قبض ها</p>
+				<div className=" w-60  lg:w-auto flex items-center gap-2 border-2 border-[#333] py-1 px-2 rounded-lg">
                     <img className="w-6 h-6" src={searchIMG} />
 					<input className="w-64 h-6 bg-transparent outline-none" placeholder="جستجو..." type="text" value={search} onChange={searchHandler} />
 				</div>
 			</div>
-			<div className="grid grid-cols-3 gap-4 mb-8 mt-3">
+			<div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-8 mt-3">
 				{search
 					? newData.map((bill) => (
 							<div
 								className={
-									"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
+									"block max-w-[550px]  bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
 								}
 								key={bill.title}
 							>
@@ -80,7 +80,7 @@ const Bills = () => {
 					: data.map((bill) => (
 							<div
 								className={
-									"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
+									"block max-w-[550px] bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
 								}
 								key={bill.title}
 							>

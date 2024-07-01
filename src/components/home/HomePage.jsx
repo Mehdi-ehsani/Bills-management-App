@@ -66,13 +66,13 @@ const HomePage = () => {
 	};
 
 	return (
-		<div>
+		<div className="mx-4">
 			<form onClick={(e) => e.preventDefault()}>
-				<div className="flex gap-3">
-					<div className="w-2/5">
+				<div className="flex gap-3 md:flex-row flex-col   flex-wrap box-border">
+					<div className="w-full lg:ml-8 lg:w-1/6  ">
 						<label className="block text-xl font-semibold mb-1">نام قبض:</label>
 						<input
-							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
+							className="border-2  min-w-[200px] border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={title}
 							maxLength={30}
@@ -80,31 +80,31 @@ const HomePage = () => {
 							onChange={(e) => dispatch(ADD_TITLE(e.target.value))}
 						/>
 					</div>
-					<div className="w-1/5">
-						<label className="block text-xl font-semibold mb-1">تاریخ:</label>
+					<div className=" w-full lg:w-1/6 lg:ml-8 ">
+						<label className="block text-lg  md:text-xl  font-semibold mb-1">تاریخ:</label>
 						<input
-							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
+							className="border-2  border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={date}
 							onChange={(e) => dispatch(ADD_DATE(e.target.value))}
 						/>
 					</div>
-					<div className="w-1/5">
-						<label className="block text-xl font-semibold mb-1">
+					<div className="w-full lg:w-1/6  ">
+						<label className="block text-lg  min-w-[100px] md:text-xl font-semibold mb-1">
 							شماره پیگیری:
 						</label>
 						<input
-							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
+							className="border-2 min-w-[200px] border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={tracking}
 							placeholder=" "
 							onChange={(e) => dispatch(ADD_TRACKING(e.target.value))}
 						/>
 					</div>
-					<div className="w-1/5">
-						<label className="block text-xl font-semibold mb-1">مبلغ:</label>
+					<div className="w-full lg:w-1/6 lg:mx-8  ">
+						<label className="block text-lg  md:text-xl font-semibold mb-1">مبلغ:</label>
 						<input
-							className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
+							className="border-2   min-w-[200px] border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-9 rounded-lg"
 							type="text"
 							value={cost}
 							placeholder=""
@@ -113,9 +113,9 @@ const HomePage = () => {
 					</div>
 				</div>
 				<div className="mt-2">
-					<label className="block text-xl font-semibold mb-1">مبلغ:</label>
+					<label className="block text-lg  md:text-xl font-semibold mb-1">توضیحات:</label>
 					<input
-						className="border-2 border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-24 rounded-lg"
+						className="border-2 min-w-[200px] border-[#333] focus:border-yellow-500 transition-colors focus:outline-none w-full h-24 rounded-lg"
 						type="text"
 						value={description}
 						placeholder=""
@@ -133,12 +133,12 @@ const HomePage = () => {
 			</form>
             <div>
 				<p className="text-3xl font-bold mt-5">قبض ها</p>
-					<div className="grid grid-cols-3 gap-4 mb-8 mt-3">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-8 mt-3">
 				
 				{data.map((bill) => (
 					<div
 						className={
-							"block bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
+							"block  bg-gray-200 border-r-2 border-yellow-400 p-3 rounded-xl shadow-md"
 						}
 						key={bill.title}
 					>
