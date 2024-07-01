@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import searchIMG from "../../../assets/search.png"
 
 const Bills = () => {
 	const [data, setData] = useState([]);
@@ -25,10 +26,11 @@ const Bills = () => {
 
 	return (
 		<div>
-			<div className="flex items-center justify-between">
+			<div className="flex items-center justify-between ">
 				<p className="text-3xl font-bold mt-5">قبض ها</p>
-				<div>
-					<input type="text" value={search} onChange={searchHandler} />
+				<div className="flex items-center gap-2 border-2 border-[#333] py-1 px-2 rounded-lg">
+                    <img className="w-6 h-6" src={searchIMG} />
+					<input className="w-64 h-6 bg-transparent outline-none" placeholder="جستجو..." type="text" value={search} onChange={searchHandler} />
 				</div>
 			</div>
 			<div className="grid grid-cols-3 gap-4 mb-8 mt-3">
